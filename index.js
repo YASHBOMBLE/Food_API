@@ -111,6 +111,24 @@ app.get('/delete-food-item-by-id',(req,res)=>{
     }
   )
 })
+
+app.get('/food-items-by-category',(req,res)=>{
+  const category=req.quary.category;
+
+  const temp=[]
+  db.forEach((item)=>{
+    if(item.category===category)
+    {
+      temp.push(item)
+    }
+  })
+  res.json({
+    success:true,
+    data:temp,
+    message:`Items for category ${category} fetched`
+  })
+})
+
 app.listen(5000,()=>{
     console.log("server is running on 5000");
 })
